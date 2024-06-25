@@ -1,0 +1,31 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int S, P, Q, N;
+    std::cin >> N >> S >> P >> Q;
+
+    std::vector<bool> appeared(1U << 31);
+    long long a = S % (1LL << 31);
+    int count = 0;
+
+    //We use a bool vector to count only non appeared values insteaf of using an unorderd_set for optimization purposes, bool vector has only one byte to store false/true
+    // If we use unorderd_set to store the sequence values and use size to get the count then there is a complexity for inserting the new values of the sequence and each value can be at least 4 bytes
+  // so we have gained the following : memory usage and access time.
+    for (int i = 0; i < N; i++) {
+        if (!appeared[a]) {
+            // If this number has not appeared before, increment the count
+            count++;
+            appeared[a] = true;
+        }
+        a = (a * P + Q) % (1LL << 31);
+    }
+
+    std::cout << count << std::endl;
+
+    return 0;
+}
