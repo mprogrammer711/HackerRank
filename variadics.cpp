@@ -2,7 +2,25 @@
 using namespace std;
 
 // Enter your code for reversed_binary_value<bool...>()
+template <bool...digits>
+struct BinaryValue;
 
+// General recursive case
+template <bool first, bool...digits>
+struct BinaryValue<first, digits...> {
+    static constexpr int value = first + 2 * BinaryValue<digits...>::value;
+};
+
+// Base case
+template <bool first>
+struct BinaryValue<first> {
+    static constexpr int value = first;
+};
+
+template <bool...digits>
+int reversed_binary_value() {
+    return BinaryValue<digits...>::value;
+}
 
 template <int n, bool...digits>
 struct CheckValues {
