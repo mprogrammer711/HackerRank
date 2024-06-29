@@ -2,6 +2,10 @@
 using namespace std;
 
 // Enter your code for reversed_binary_value<bool...>()
+// The following forward declaration is necessary because the BinaryValue struct is used recursively. 
+// In the definition of BinaryValue<first, digits...>, it refers to BinaryValue<digits...>. 
+// Without the forward declaration, the compiler wouldn't know that BinaryValue<digits...> is 
+// a valid template struct, because it hasn't been fully defined yet.
 template <bool...digits>
 struct BinaryValue;
 
